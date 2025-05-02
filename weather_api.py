@@ -1,6 +1,6 @@
 import requests
 from pprint import pprint
-from datetime import datetime
+
 
 # Словарь перевода значений направления ветра
 DIRECTION_TRANSFORM = {
