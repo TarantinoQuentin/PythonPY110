@@ -22,6 +22,7 @@ from app_datetime.views import datetime_view
 from app_datetime.views import dynamic_datetime_view
 from app_weather.views import weather_view
 from app_store.views import product_view_json
+from app_store.views import shop_view
 
 
 def random_view(request):
@@ -55,5 +56,6 @@ urlpatterns = [
     path('datetime/', datetime_view),
     path('dynamic_datetime/', dynamic_datetime_view),
     path('weather/', weather_view),
-    path('product/', product_view_json)
+    path('product/', product_view_json),
+    path('', shop_view),
 ]
