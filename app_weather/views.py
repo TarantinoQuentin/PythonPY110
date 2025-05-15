@@ -12,4 +12,4 @@ def weather_view(request):
         else:  # Иначе получаем данные о погоде из Санкт-Петербурга
             data = current_weather(59.93, 30.31)
     return JsonResponse(data, json_dumps_params={'ensure_ascii': False,
-                                                     'indent': 4})
+                                                 'indent': 4})
