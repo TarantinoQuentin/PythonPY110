@@ -30,7 +30,7 @@ def product_view_json(request):
 
 def shop_view(request):
     if request.method == "GET":
-        return render(request, 'app_store/shop.html')
+        return render(request, 'app_store/shop.html', context={"products": DATABASE.values()})
 
 
 def product_page_view(request, page):
@@ -84,3 +84,23 @@ def cart_del_view_json(request, id_product):
         return JsonResponse({"answer": "Неудачное удаление из корзины"},
                             status=404,
                             json_dumps_params={'ensure_ascii': False})
+
+
+def cart_view(request):
+    if request.method == "GET":
+        username = ''
+        data = view_in_cart(username)[username]  # Получаем корзину пользователя username
+
+        products = []  # Список продуктов
+        for product_id, quantity in data['products'].items():
+            product = DATABASE[product_id]  # Получаем информацию о продукте
+            # в словарь product под ключом "quantity" запишите текущее значение количества товара в корзине
+            product["quantity"] = quantity  # Реализуйте
+            # в словарь product под ключом "price_total" посчитайте и запишите общую стоимость товара как произведение
+            #  его количества в корзине на цену с учетом скидки ('price_after'). Значение цены "price_total" приведите к формату
+            #  2 символов после запятой
+            product["price_total"] = round((product['price_after'] * quantity), 2)  # Реализуйте
+            #  добавьте словарь product в конец списка products
+            products.append(product)  # Реализуйте
+
+        return render(request, "app_store/cart.html", context={"products": products})

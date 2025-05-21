@@ -2,18 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Интернет-магазин здоровых продуктов</title>
+    <title>Корзина</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 
-	<link type="image/x-icon" href="{% static 'app_store/images/favicon.png' %}" rel="shortcut icon">
-    <link rel="stylesheet" href="{% static 'app_store/css/open-iconic-bootstrap.min.css' %}">
+    <link type="image/x-icon" href="{% static 'app_store/images/favicon.png' %}" rel="shortcut icon">
+	<link rel="stylesheet" href="{% static 'app_store/css/open-iconic-bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'app_store/css/animate.css' %}">
-    
+
     <link rel="stylesheet" href="{% static 'app_store/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'app_store/css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'app_store/css/magnific-popup.css' %}">
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{% static 'app_store/css/bootstrap-datepicker.css' %}">
     <link rel="stylesheet" href="{% static 'app_store/css/jquery.timepicker.css' %}">
 
-    
+
     <link rel="stylesheet" href="{% static 'app_store/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'app_store/css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'app_store/css/style.css' %}">
@@ -76,89 +76,123 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"></span></p>
-            <h1 class="mb-0 bread">Продукты</h1>
+            <h1 class="mb-0 bread">Корзина</h1>
           </div>
         </div>
       </div>
     </div>
 
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center">
-    			<div class="col-md-10 mb-5 text-center">
-    				<ul class="product-category">
-    					<li><a href="#" class="active">Все</a></li>
-    					<li><a href="#">Овощи</a></li>
-    					<li><a href="#">Фрукты</a></li>
-    					<li><a href="#">Соки</a></li>
-    					<li><a href="#">Семена</a></li>
-    				</ul>
-    			</div>
-    		</div>
-    		<div class="row">
-				{% for product in products %}
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">
-    					<a href="{% url 'app_store:product_page_view' product.html %}" class="img-prod">
-							<img class="img-fluid" src="{% static product.url %}" alt="Colorlib Template">
-							{% if product.discount %}
-							<span class="status">{{product.discount}}</span>
-							{% else %}
-							<div class="overlay"></div>
-							{% endif %}
-    					</a>
-    					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">{{product.name}}</a></h3>
-    						<div class="d-flex">
-    							<div class="pricing">
-		    						<p class="price">
-										{% if product.discount %}
-										<span class="mr-2 price-dc">{{product.price_before}}</span>
-										<span class="price-sale">{{product.price_after}}</span>
-										{% else %}
-										<span>&#x20bd {{product.price_before}}</span>
-										{% endif %}
-									</p>
-		    					</div>
-	    					</div>
-	    					<div class="bottom-area d-flex px-3">
-	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center" data-product-id="1">
-	    								<span><i class="ion-ios-add-circle-outline" data-product-id="1"></i></span>
-	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
-	    								<span><i class="ion-ios-heart-empty" data-product-id="1" data-state="inactive" data-action="toggle"></i></span>
-	    							</a>
-    							</div>
-								<div class="custom-popup-message" data-product-id="1"></div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-				{% endfor %}
-    		</div>
-    		<div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-    	</div>
-    </section>
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>&nbsp;</th>
+						        <th>&nbsp;</th>
+						        <th>Продукт</th>
+						        <th>Цена, &#x20bd</th>
+						        <th>Количество товара</th>
+						        <th>Общая цена, &#x20bd</th>
+						      </tr>
+						    </thead>
+						    <tbody>
 
-	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+							  {% for product in products %}
+							  <tr class="text-center">
+						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+
+						        <td class="image-prod"><div class="img" style="background-image:url({% static product.url %});"></div></td>
+
+						        <td class="product-name">
+						        	<h3>{{product.name}}</h3>
+						        	<p>{{product.description}}</p>
+						        </td>
+
+						        <td class="price">{{product.price_after}}</td>
+
+						        <td class="quantity">
+						        	<div class="input-group mb-3">
+					             	<input type="number" name="quantity" class="quantity form-control input-number" value={{product.quantity}} min="1" max="100">
+					          	</div>
+					          </td>
+
+						        <td class="total">{{product.price_total}}</td>
+						      </tr><!-- END TR-->
+							  {% endfor %}
+
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+    		<div class="row justify-content-end">
+    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Промокод</h3>
+    					<p>Введите код купона, если он у вас есть</p>
+  						<form action="#" class="info">
+						  <div class="form-group">
+							<input type="text" id='promo-input' class="form-control text-left px-3" placeholder="Промокод">
+						  </div>
+						</form>
+    				</div>
+    				<p><button id="checkCoupon" class="btn btn-primary py-3 px-4">Применить промокод</button></p>
+					<div id="couponResult"></div>
+    			</div>
+    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Расчёт доставки</h3>
+    					<p>Введите ваш город доставки</p>
+  						<form action="#" class="info">
+						  <div class="form-group">
+							<label>Страна</label>
+							<input type="text" id='delivery-country' class="form-control text-left px-3" placeholder="Россия" required>
+						  </div>
+						  <div class="form-group">
+							<label>Город/Населенный пункт</label>
+							<input type="text" id='delivery-city' class="form-control text-left px-3" placeholder="Санкт-Петербург" required>
+						  </div>
+						  <div class="form-group">
+							<label>Почтовый код</label>
+							<input type="text" id='delivery-post-code' class="form-control text-left px-3" placeholder="195251" required>
+						  </div>
+
+						</form>
+    				</div>
+						<p><button id="estimateDelivery" class="btn btn-primary py-3 px-4">Рассчитать</button></p>
+						<div id="estimateResult"></div>
+    			</div>
+    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Стоимость покупку</h3>
+    					<p class="d-flex">
+    						<span>Промежуточный итог</span>
+    						&#x20bd  <span id="subtotal-value">710.00</span>
+    					</p>
+    					<p class="d-flex">
+    						<span>Доставка</span>
+    						&#x20bd <span id="delivery-value">0.00</span>
+    					</p>
+    					<p class="d-flex">
+    						<span>Скидки</span>
+    						&#x20bd <span id="discount-value">0.00</span>
+    					</p>
+    					<hr>
+    					<p class="d-flex total-price">
+    						<span>Итог</span>
+    						<b style="color: black">&#x20bd</b> <span id="total-value">710.00</span>
+    					</p>
+    				</div>
+    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Оплатить</a></p>
+    			</div>
+    		</div>
+			</div>
+		</section>
+
+		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
           <div class="col-md-6">
@@ -249,8 +283,8 @@
         </div>
       </div>
     </footer>
-    
-  
+
+
 
   	<!-- loader -->
   	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -274,10 +308,14 @@
   	<script src="{% static 'app_store/js/main.js' %}"></script>
 
 	<!-- Блок дополнительных пользовательских скриптов-->
-	<!-- Функциональность добавления в корзину товара по нажатию на кнопку (должен быть реализован адрес /cart/add/) -->
-  	<script src="{% static 'app_store/js/appAddToCard.js' %}"></script>
-	<!-- Функциональность добавления в избранное товара по нажатию на кнопку (должен быть реализован адрес /wishlist/add/) -->
-  	<script src="{% static 'app_store/js/appAddToWishlist.js' %}"></script>
-    
+	<!-- Функция обновления итоговой суммы у корзины с учетом доставки и купонов-->
+	<script src="{% static 'app_store/js/appUpdateSubtotal.js' %}"></script>
+	<!-- Функция обновления суммы покупки товара при увеличении числа товара в заказе-->
+	<script src="{% static 'app_store/js/appUpdateTotal.js' %}"></script>
+	<!-- Функция проверки валидности купона при отправке запроса на адрес /coupon/check/-->
+	<script src="{% static 'app_store/js/appCheckCoupon.js' %}"></script>
+	<!-- Функция расчета стоимости доставки при отправке запроса на адрес /delivery/estimate с параметрами country, city, code-->
+	<script src="{% static 'app_store/js/appEstimateDelivery.js' %}"></script>
+
   </body>
 </html>
