@@ -48,13 +48,13 @@ def product_page_view(request, page):
         if isinstance(page, str):  # Проверяем, что в параметр page передали значение строкового типа
             for data in DATABASE.values():  # Перебираем все товары (словари) в DATABASE
                 if data['html'] == page:  # Если значение переданного параметра совпадает именем html файла, получаемого по ключу
-                    data_other_products = DATABASE.values()  # TODO Переделать по заданию
+                    data_other_products = DATABASE.values()
                     return render(request, 'app_store/product.html', context={'product': data,
                                                                               'other_products': data_other_products})
         elif isinstance(page, int):  # Ветка для обработки типа int
             data = DATABASE.get(str(page))  # Получаем какой странице соответствует данный id
             if data:  # Если по данному page было найдено значение
-                data_other_products = DATABASE.values()  # TODO Переделать по заданию
+                data_other_products = DATABASE.values()
                 return render(request, 'app_store/product.html', context={'product': data,
                                                                           'other_products': data_other_products})
         return HttpResponse(status=404)
