@@ -30,7 +30,17 @@ def product_view_json(request):
 
 def shop_view(request):
     if request.method == "GET":
-        return render(request, 'app_store/shop.html', context={"products": DATABASE.values()})
+        # Обработка фильтрации из параметров запроса
+        category_key = request.GET.get("category")
+        if ordering_key := request.GET.get("ordering"):
+            if request.GET.get("reverse") in ('true', 'True'):
+                data = filtering_category(DATABASE, category_key, ordering_key, True)
+            else:
+                data = filtering_category(DATABASE, category_key, ordering_key)
+        else:
+            data = filtering_category(DATABASE, category_key)
+        return render(request, 'app_store/shop.html',
+                      context={"products": data, "category": category_key})
 
 
 def product_page_view(request, page):
@@ -38,17 +48,15 @@ def product_page_view(request, page):
         if isinstance(page, str):  # Проверяем, что в параметр page передали значение строкового типа
             for data in DATABASE.values():  # Перебираем все товары (словари) в DATABASE
                 if data['html'] == page:  # Если значение переданного параметра совпадает именем html файла, получаемого по ключу
-                    with open(f'app_store/product/{page}.html', encoding="utf-8") as f:
-                        page_data = f.read()
-                    return HttpResponse(page_data)
-            # Если за всё время поиска не было совпадений, то значит по данному имени нет соответствующей
-            # страницы товара и можно вернуть ответ с ошибкой HttpResponse(status=404)
+                    data_other_products = DATABASE.values()  # TODO Переделать по заданию
+                    return render(request, 'app_store/product.html', context={'product': data,
+                                                                              'other_products': data_other_products})
         elif isinstance(page, int):  # Ветка для обработки типа int
             data = DATABASE.get(str(page))  # Получаем какой странице соответствует данный id
             if data:  # Если по данному page было найдено значение
-                with open(f'app_store/product/{data["html"]}.html',
-                          encoding="utf-8") as f:  # Определяем название файла для открытия
-                    return HttpResponse(f.read())
+                data_other_products = DATABASE.values()  # TODO Переделать по заданию
+                return render(request, 'app_store/product.html', context={'product': data,
+                                                                          'other_products': data_other_products})
         return HttpResponse(status=404)
 
 
