@@ -54,4 +54,5 @@ urlpatterns = [
     path('', include('app_weather.urls')),
     path('', include('app_store.urls')),
     path('login/', include('app_login.urls')),
+    path('', include('app_wishlist.urls')),
 ]
