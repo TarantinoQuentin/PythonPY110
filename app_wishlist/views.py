@@ -67,8 +67,8 @@ def wishlist_del_view_json(request, id_product: str):
 def wishlist_del_view(request, id_product):
     if request.method == "GET":
         username = get_user(request).username
-        result = remove_from_wishlist(id_product, username)  # Вызвать функцию удаления из корзины
+        result = remove_from_wishlist(id_product, username)
         if result:
-            return redirect("app_wishlist:wishlist_view")  # Вернуть перенаправление на корзину
+            return redirect("app_wishlist:wishlist_view")
 
         return HttpResponseNotFound("Неудачное удаление из избранного")
