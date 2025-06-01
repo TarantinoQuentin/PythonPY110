@@ -74,7 +74,7 @@
 	          <li class="nav-item"><a href="{% url 'app_store:shop_view' %}" class="nav-link">Магазин</a>
 			  <li class="nav-item"><a href="{% url 'app_wishlist:wishlist_view' %}" class="nav-link">Избранное</a>
 			  <li class="nav-item"><a href="{% url 'app_store:cart_view' %}" class="nav-link">Корзина</a>
-              {% if user.is_authenticated %}' %}
+              {% if user.is_authenticated %}
               <li class="nav-item"><a href="{% url 'app_login:logout_view'%}" class="nav-link">Выйти из аккаунта</a>
               <li class="nav-item"><a class="nav-link">Привет {{user.username}}!</a>
               {% else %}
