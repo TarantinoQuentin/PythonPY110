@@ -11,21 +11,27 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()  # здесь загружаются данные из .env и отправляются в переменные окружения
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!*&fmm@^2@3%2dj@xzjl$a7gj(6a)$=j7nvi5@m!uc@1trmn=m'
+# SECRET_KEY = 'django-insecure-!*&fmm@^2@3%2dj@xzjl$a7gj(6a)$=j7nvi5@m!uc@1trmn=m'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.getenv('DEBUG') == 'true'
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS').split(',')]
 
 
 # Application definition
@@ -42,6 +48,7 @@ INSTALLED_APPS = [
     'app_store',
     'app_login',
     'app_wishlist',
+    'app_htmx',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +127,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_URL = "static/"  # Папка в корне проекта, где будут собираться статические файлы
+if 'localhost' in ALLOWED_HOSTS:
+   STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Папка для локального проекта
+else:
+   STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Папка для сервера
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
