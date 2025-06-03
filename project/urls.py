@@ -55,4 +55,5 @@ urlpatterns = [
     path('', include('app_store.urls')),
     path('login/', include('app_login.urls')),
     path('', include('app_wishlist.urls')),
+    path('htmx/', include('app_htmx.urls')),
 ]
