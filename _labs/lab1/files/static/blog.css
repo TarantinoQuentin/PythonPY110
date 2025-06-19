@@ -23,7 +23,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #1e81b0;
 }
 
 /* Стили для статей в основной части */
@@ -36,7 +36,7 @@ article {
     width: 30%;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #f4f4f4;
+    background-color: #e28743;
     border: 1px solid #ddd;
 }
 
@@ -52,7 +52,7 @@ article p {
 /* Стили для сайдбара */
 aside {
     width: 30%;
-    background-color: #f4f4f4;
+    background-color: #e28743;
     padding: 20px;
     border: 1px solid #ddd;
 }
@@ -72,7 +72,7 @@ aside ul li {
 
 /* Стили для футера */
 footer {
-    background-color: #333;
+    background-color: #154c79;
     color: #fff;
     text-align: center;
     padding: 10px 0;
@@ -80,11 +80,11 @@ footer {
 
 /* Оформление ссылок */
 a {
-    color: #007acc;
+    color: #063970;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #0056b3;
+    color: #21130d;
 }
